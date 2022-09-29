@@ -20,8 +20,8 @@ def handle_events():
                 character.clip_draw(frame * 100, 100 * 1, 100, 100, x, -90)
                 update_canvas() #아니 캐릭터 사진에서 분명 위치 옮기는거 일텐데
 
-            elif event.key == SDLK_UP:
-                y = y + 10
+            if event.key == SDLK_UP:
+                y = y + 10 #아니 왜 안움직여
 
             elif event.key == SDLK_DOWN:
                 y = y - 10
@@ -34,7 +34,7 @@ grass = load_image('TUK_GROUND.png')
 character = load_image('animation_sheet.png')
 
 running = True
-x = 800 // 2 #이게 뭔 값이였지
+x = 800 // 2 #이게 뭔 값이였지# #800 // 2 전체 캔버스800에서 절반을 사용하겠다 는 의
 y = 800 // 2
 dir = 0
 pass
