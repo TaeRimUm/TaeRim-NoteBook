@@ -66,8 +66,8 @@ while running:
     clear_canvas()
     grass.draw(400, 200)
 
-    if xdir == 1:
-        character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+    #if xdir == 1:
+    character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
                                                        #x, y) 로 수정하면 대각선으로 움직임.
                                                        #90, x)로 수정하면 좌, 우 키눌렀는데 위, 아래로 움직임.
     update_canvas()
