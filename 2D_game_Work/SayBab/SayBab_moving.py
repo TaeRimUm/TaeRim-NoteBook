@@ -56,7 +56,7 @@ frame = 0
 
 while running:
     clear_canvas()
-    grass.draw(450, 305)
+    grass.draw(430, 305)
 
     if xdir == 0 and ydir == 0: #대기
         character.clip_draw(frame * 100, 300 * 1, 100, 100, x, y)
