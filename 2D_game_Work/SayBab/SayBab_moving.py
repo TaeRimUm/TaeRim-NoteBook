@@ -30,6 +30,9 @@ def handle_events():
             elif event.key == SDLK_ESCAPE:
                 running = False
 
+            elif event.key == SDLK_KP_D:
+
+
 
         elif event.type == SDL_KEYUP:
 
@@ -53,12 +56,17 @@ grass = load_image('SayBab_Test_BackGround.png')
 character = load_image('SayBar.png')
 
 running = True
+attack = True
 x = 800 // 2 #800 // 2 전체 캔버스800에서 절반을 사용하겠다 는 의미
 xdir = 0
 ydir = 0
 y = 600 // 2
 frame = 0
 t = 3
+
+while attack:
+    #공격 모션은 while을 하나 더 만들어야 하나?
+    # 그러면 프레임이 8개짜리로 고정해야 할 텐데?
 
 
 while running:
