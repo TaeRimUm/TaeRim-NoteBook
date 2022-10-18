@@ -70,7 +70,8 @@ def handle_events():
                  game_framework.push_state(add_delete_boy)
 
             #game_framework.change_state(logo_state)
-            #game_framework.quit()
+            #game_framework.quit()import title_state
+
 
 
 boy = None # c로 따지면 NULL
