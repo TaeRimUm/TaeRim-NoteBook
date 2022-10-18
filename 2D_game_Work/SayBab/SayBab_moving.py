@@ -75,11 +75,6 @@ attack_1 = 0
 frame = 0
 t = 3
 
-# while attack:
-# 공격 모션은 while을 하나 더 만들어야 하나?
-# 그러면 프레임이 8개짜리로 고정해야 할 텐데?
-
-
 while running:
     clear_canvas()
     grass.draw(430, 305)
