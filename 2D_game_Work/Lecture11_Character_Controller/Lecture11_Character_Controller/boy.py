@@ -3,13 +3,16 @@ from pico2d import *
 
 #이벤트 정의 Right Down...Letf Up
 #RD, LD, RU, LU = 0, 1, 2, 3
-RD, LD, RU, LU, TIMER, AUTO_RUN = range(6)
+RD, LD, RU, LU, TIMER, AUTO_RUN,AU,AD = range(6)
 
 key_event_table = { #맵핑
     (SDL_KEYDOWN, SDLK_RIGHT) : RD,
     (SDL_KEYDOWN, SDLK_LEFT) : LD,
     (SDL_KEYUP, SDLK_RIGHT) : RU,
-    (SDL_KEYUP, SDLK_LEFT) : LU
+    (SDL_KEYUP, SDLK_LEFT) : LU,
+    (SDL_KEYDOWN, SDLK_a) : AD,
+    (SDL_KEYUP, SDLK_a) : AU
+
 }
 
 #이벤트가 막 들어오는걸 해석할 큐가 필요함 -> 들어오는 작업을 놓치지 않고, 하나하나 꺼내서 실행하는게 큐다.
@@ -64,7 +67,10 @@ class RUN: ##이벤트를 만듦.##
             self.dir -= 1
         elif event == LU:
             self.dir += 1
-
+        elif event == AD:
+            self.a += 1
+        elif event == AU:
+            self.a -= 1
 
     def exit(self):
         print('EXIT RUN')
@@ -110,11 +116,11 @@ class SLEEP: ##상태를 먼저 만듦.##
         if self.face_dir == -1:
             self.image.clip_composite_draw(self.frame * 100, 200, 100, 100,
                                            -3.141592/2, '', #회전각, 좌우반전. 누워있는거니까ㅇㅇ
-                                           self.x, self.y, 100, 200)
+                                           self.x + 25, self.y - 25, 100, 100)
         else:
-            self.image.clip_draw(self.frame * 100, 300, 100, 100,
+            self.image.clip_compoaite_draw(self.frame * 100, 300, 100, 100,
                                  3.141592/2, '',
-                                 self.x, self.y, 100, 200)
+                                 self.x - 25, self.y - 25, 100, 100)
 
 
 #상태 변환
@@ -163,7 +169,7 @@ class Boy:
             self.cur_state.enter(self, event) #다음 상태의 enter 액션을 수행.
 
     def draw(self): #소년을 그려야 함.
-        self.cur_state.do(self) #draw(self)로 자기 자신을 넘겨줌.
+        self.cur_state.draw(self) #draw(self)로 자기 자신을 넘겨줌.
 
     def add_event(self, event):
         self.q.insert(0, event)
