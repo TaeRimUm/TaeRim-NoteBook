@@ -42,7 +42,7 @@ class Boy:
             self.big_ball_image.draw(self.x+10, self.y+50)
 
         if self.add_delete == 'PLUS':
-            self.add_delete_boy.draw(self.x, self.y)
+            self.add_delete_boy.draw(self.x+10, self.y+50)
         elif self.add_delete == 'MINUS':
             #이미지 지우는걸 어케하더라#
              self.add_delete_boy.draw(None)
