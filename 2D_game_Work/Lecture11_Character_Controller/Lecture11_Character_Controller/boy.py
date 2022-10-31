@@ -3,7 +3,7 @@ from pico2d import *
 
 #이벤트 정의 Right Down...Letf Up
 #RD, LD, RU, LU = 0, 1, 2, 3
-RD, LD, RU, LU, TIMER = range(5)
+RD, LD, RU, LU, TIMER, AUTO_RUN = range(6)
 
 key_event_table = { #맵핑
     (SDL_KEYDOWN, SDLK_RIGHT) : RD,
@@ -23,7 +23,7 @@ key_event_table = { #맵핑
 class IDLE: ##상태를 먼저 만듦.##
     #들어올 떄, 나갈 때 각각 함수로 구현
     @staticmethod #<== 이게 self안쓰도록 하는거.
-    def enter(self): #enter(self)안쓰도록.
+    def enter(self, event): #enter(self)안쓰도록.
         print('ENTER IDLE')
         self.dir = 0 #정지상태니까 0
         self.timer = 1000
@@ -121,14 +121,9 @@ class SLEEP: ##상태를 먼저 만듦.##
 next_state = {
     IDLE : { RU:RUN, LU:RUN, RD:RUN, LD:RUN, TIMER:SLEEP }, #두개가 동시에 눌러져 있을 때(왼, 오) 오른쪽을 때면 왼쪽으로 가도록.
     RUN : { RU:IDLE, LU:IDLE, LD:IDLE, RD:IDLE },
-    SLEEP : { RU:RUN, LU:RUN, RD:RUN, LD:RUN }
+    SLEEP : { RU:RUN, LU:RUN, RD:RUN, LD:RUN },
+    AUTO_RUN : { RU:RUN, LU:RUN, RD:RUN, LD:RUN, TIMER:SLEEP, RU:IDLE, LU:IDLE, LD:IDLE, RD:IDLE }
 }
-
-
-
-class Boy:
-
-
 
         #if event.type == SDL_KEYDOWN:
         #    match event.key:
@@ -145,7 +140,7 @@ class Boy:
         #            self.dir -= 1
         #            self.face_dir = 1
         #pass
-
+class Boy:
     def __init__(self):
         self.x, self.y = 800//2, 90
         self.frame = 0
@@ -165,7 +160,7 @@ class Boy:
             event = self.q.pop()  # 이벤트 꺼내기
             self.cur_state.exit(self)  # 현재 상태 나가고
             self.cur_state = next_state[self.cur_state][event]  # 현재 상태(다음 상태) 계산
-            self.cur_state.enter(self) #다음 상태의 enter 액션을 수행.
+            self.cur_state.enter(self, event) #다음 상태의 enter 액션을 수행.
 
     def draw(self): #소년을 그려야 함.
         self.cur_state.do(self) #draw(self)로 자기 자신을 넘겨줌.
