@@ -9,10 +9,10 @@ import add_delete_boy
 import play_state_Boy_move
 
 pico2d.open_canvas()
-#game_framework.run(logo_state)
-#game_framework.run(play_state)
+game_framework.run(logo_state)
+game_framework.run(play_state)
 #game_framework.run(item_state)
-game_framework.run(play_state_Boy_move)
+#game_framework.run(play_state_Boy_move)
 
 
 pico2d.close_canvas()
