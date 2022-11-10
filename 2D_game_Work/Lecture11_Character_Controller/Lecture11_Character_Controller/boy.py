@@ -3,7 +3,7 @@ from pico2d import *
 
 #이벤트 정의 Right Down...Letf Up
 #RD, LD, RU, LU = 0, 1, 2, 3
-RD, LD, RU, LU, TIMER, AUTO_RUN,AU,AD = range(6)
+RD, LD, RU, LU, TIMER, AUTO_RUN,AU,AD = range(8)
 
 key_event_table = { #맵핑
     (SDL_KEYDOWN, SDLK_RIGHT) : RD,
