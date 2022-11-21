@@ -1,20 +1,18 @@
 from pico2d import *
 
-
 def handle_events():
     # 좌우 움직이기!!!!
     global running
-    global x, y, xdir, ydir  # 바깥쪽에 정의된 X이다!
+    global x, y, xdir, ydir #바깥쪽에 정의된 X
     global t
     global attack_1
 
-    events = get_events()  # 1. 입력 이벤트 폴링
+    events = get_events() #1. 입력 이벤트 폴링
     for event in events:
-        if event.type == SDL_QUIT:  # 2. 이벤트 종류 구분
+        if event.type == SDL_QUIT: #2. 이벤트 종류 구분
             running = False
         elif event.type == SDL_KEYDOWN:
 
-            # 아래 Tab키로 띄어쓰기 중요함
             if event.key == SDLK_RIGHT:  # 오른쪽 #3. 이벤트 실제 입력값 구하기
                 xdir += 1  # 증가
                 t = 1
@@ -57,8 +55,7 @@ def handle_events():
                 attack_1 -= 1
                 t = 3
 
-#def attack_1(): #함수로 만들어보자
-    
+
 
 
 open_canvas()
@@ -67,7 +64,7 @@ character = load_image('SayBar_1.png')
 
 running = True
 attack = True
-x = 800 // 2  # 800 // 2 전체 캔버스800에서 절반을 사용하겠다 는 의미
+x = 800 // 2 #800 // 2 전체 캔버스800에서 절반을 사용하겠다 는 의미
 y = 600 // 2
 xdir = 0
 ydir = 0
@@ -80,45 +77,46 @@ while running:
     grass.draw(430, 305)
 
     character.clip_draw(frame * 100, 100 * t, 100, 100, x, y)
+    #if xdir == 0 and ydir == 0: #대기
+        #character.clip_draw(frame * 100, 100 * 3, 100, 100, x, y)
 
-    # if xdir == 0 and ydir == 0: #대기
-    # character.clip_draw(frame * 100, 100 * 3, 100, 100, x, y)
-    if attack_1 == 1:  # 공격
-
+    if attack_1 == 1 :  # 공격
         character.clip_draw(frame * 100, 500 * 1, 100, 100, x, y)
+
 
     if xdir != 0 and ydir != 0:
         character.clip_draw(frame * 100, 100 * 4, 100, 100, x, y)
 
-    # 좌우 움직임
-    if xdir == 1 and ydir == 0:  # 오른쪽으로
+    #좌우 움직임
+    if xdir == 1 and ydir == 0: #오른쪽으로
         character.clip_draw(frame * 100, 100 * t, 100, 100, x, y)
 
-    elif xdir == -1 and ydir == 0:  # 왼쪽으로
-        character.clip_draw(frame * 100, 100 * t, 100, 100, x, y)
-
-
-    # 위아래 움직임
-    elif xdir == 0 and ydir == 1:  # 위로
-        character.clip_draw(frame * 100, 100 * t, 100, 100, x, y)
-
-    elif xdir == 0 and ydir == -1:  # 아래로
+    elif xdir == -1 and ydir == 0: #왼쪽으로
         character.clip_draw(frame * 100, 100 * t, 100, 100, x, y)
 
 
-    # 대각선
-    elif xdir == 1 and ydir == 1:  # 오른쪽으로 움직임, 위로 올라감(오른쪽 위 대각선)
+    #위아래 움직임
+    elif xdir == 0 and ydir == 1: #위로
+        character.clip_draw(frame * 100, 100 * t, 100, 100, x, y)
+
+    elif xdir == 0 and ydir == -1: #아래로
+        character.clip_draw(frame * 100, 100 * t, 100, 100, x, y)
+
+
+    #대각선
+    elif xdir == 1 and ydir == 1: #오른쪽으로 움직임, 위로 올라감(오른쪽 위 대각선)
         character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
 
-    elif xdir == 1 and ydir == -1:  # 오른쪽으로 움직임, 아래로 내려감(오른쪽 아래 대각선)
+    elif xdir == 1 and ydir == -1: #오른쪽으로 움직임, 아래로 내려감(오른쪽 아래 대각선)
         character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
 
 
-    elif xdir == -1 and ydir == 1:  # 왼쪽으로 움직임, 위로 올라감(왼쪽 위 대각선)
+    elif xdir == -1 and ydir == 1: #왼쪽으로 움직임, 위로 올라감(왼쪽 위 대각선)
         character.clip_draw(frame * 100, 0 * 1, 100, 100, x, y)
 
-    elif xdir == -1 and ydir == -1:  # 왼쪽으로 움직임, 아래로 내려감(왼쪽 아래 대각선)
+    elif xdir == -1 and ydir == -1: #왼쪽으로 움직임, 아래로 내려감(왼쪽 아래 대각선)
         character.clip_draw(frame * 100, 0 * 1, 100, 100, x, y)
+        
 
     update_canvas()
 
@@ -127,5 +125,6 @@ while running:
     x += xdir * 10
     y += ydir * 10
     delay(0.05)
+
 
 close_canvas()
