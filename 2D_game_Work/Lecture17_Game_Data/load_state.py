@@ -55,8 +55,9 @@ def load_saved_world():
     #일케 하면 됨.
     for o in game_world.all_objects():
         if isinstance(o, Boy):
-            server.boy = 0
-            break
+            server.boy = o ## 아니 엄태림 븅신아 0으로 적어놓으면 어케 븅신아!!!!!!!!!! ##
+            break #game world 중에 boy를 찾아줌. boy를 지정함.
+    pass
 
 def handle_events():
     events = get_events()
