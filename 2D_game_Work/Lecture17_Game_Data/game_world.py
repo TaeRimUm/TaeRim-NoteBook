@@ -5,6 +5,7 @@ import pickle
 # layer 1: Foreground Objects
 objects = [[], []]
 collision_group = dict()
+#objects 랑 collision_group를 피클해주면 됨!!
 
 def add_object(o, depth):
     objects[depth].append(o)
@@ -85,9 +86,16 @@ def update():
 
 
 def save():
-    # fill here
-    pass
+    game = [objects, collision_group] #우리가 저장해야 할 대상을 먼저 정해야 함.
+    with open('game.sav', 'wb') as f:
+        pickle.dump(game, f)
+        #이러면 game_world 몽땅 세이브 끝!!!
 
 def load():
-    # fill here
-    pass
+    global objects, collision_group
+    with open('game.sav', 'rb') as f:
+        game = pickle.load(f)
+        objects, collision_group = game[0], game[1]
+        #로드도 끝!!!
+
+#만약, 내 게임이 배경이 변하지 않는다면, game_world를 전부 저장할 필요가 없다. 그건 조정해야 함.
