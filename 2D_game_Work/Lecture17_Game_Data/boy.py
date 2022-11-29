@@ -130,7 +130,7 @@ class Boy:
 
     # 객체 속성 중에서, 피클이 필요한 속성을 딕셔너리 형태로 알려줌.
     def __getstate__(self): #소년이란 객체를 피클링 할 때, 뭐를 피클링해야 할지 딕셔너리를 통해 알려줌.__getstate__
-        state = {'x': self.x, 'y':self.y, 'dir':self.dir, 'cur_state':self.cur_state}
+        state = {'x': self.x, 'y': self.y, 'dir': self.dir, 'cur_state': self.cur_state}
             #얘만 피클 됨. __getatate__를 만들어 주지 않으면, 소년의 전체를 피클하게 됨.
             #이걸 만들어 줘서 info(state로 바꿔도 됨)만 피클하게 된다.
         return state
@@ -166,7 +166,6 @@ class Boy:
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
-
 
     def handle_collision(self, other, group):
         pass
