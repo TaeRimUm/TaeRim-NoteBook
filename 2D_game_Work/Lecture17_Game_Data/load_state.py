@@ -1,6 +1,6 @@
 import random
 import json
-import tomllib
+# import tomllib
 import pickle
 import os
 
@@ -41,17 +41,22 @@ def create_new_world():
     game_world.add_collision_pairs(server.boy, None, 'boy:zombie')
 
     # fill here
-
-
-
-
-
-
+    with open('zombie_data.json', 'r') as f: #좀비 데이터를 열어서, f로 취급함(저장)
+        zombie_list = json.load(f)
+        for o in zombie_list:
+            zombie = Zombie(o['name'], o['x'], o['y'], o['size'])
+            #좀비 만들기. 하나의 o는 하나의 딕셔너리 각각의 딕셔너리는 하나의 좀비를 담고 있음
+            game_world.add_object(zombie, 1)
+            game_world.add_collision_pairs(None, zombie, 'boy:zombie')
 
 
 def load_saved_world():
-    # fill here
-    pass
+    game_world.load() #아직 어떤게 뭔지(무엇이 주인공인지), server의 boy는 저장은 안함.
+    #일케 하면 됨.
+    for o in game_world.all_objects():
+        if isinstance(o, Boy):
+            server.boy = 0
+            break
 
 def handle_events():
     events = get_events()
